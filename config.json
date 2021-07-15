@@ -1,0 +1,9 @@
+{
+    "url": "http://10.5.160.105/local/ajax/go.php",
+    "method": "POST",
+    "json_body": "{\"name\": \"John Doe\"}",
+    "request_timeout": 2,
+    "request_count": 100,
+    "timeout_seconds": 1,
+    "access_token": ""
+}
