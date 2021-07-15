@@ -11,7 +11,7 @@ import (
 
 var (
 	config Config
-	client http.Client
+	client = &http.Client{Timeout: 5 * time.Second}
 )
 
 type Config struct {
@@ -43,14 +43,18 @@ func main() {
 
 func sendRequest() {
 	request, err := http.NewRequest(config.Method, config.Url, bytes.NewBufferString(config.JsonBody))
+
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
-	do, err := client.Do(request)
+
+	response, err := client.Do(request)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
+		return
 	}
-	defer do.Body.Close()
+
+	response.Body.Close()
 }
 
 func (c *Config) Read(filepath string) *Config {
